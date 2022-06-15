@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
+
 import "./login-style.css"
 
 const LoginComponent = () => {
-    const initialValues = { username: "", email: "", password: "" };
+    const navigate = useNavigate();
+    const auth = useAuth();
+    const initialValues = auth.user;//{ username: "", email: "", password: "" };
     const [formValues, setFormvalues] = useState(initialValues);
     const [formErrors, setFormErrors] = useState({});
     const [isSubmit, setIsSubmit] = useState(false);
-    const navigate = useNavigate();
+    
     const handleSubmit = (e) => {
         e.preventDefault();
         setFormErrors(validate(formValues));
@@ -17,11 +21,11 @@ const LoginComponent = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormvalues({ ...formValues, [name]: value });
-        //console.log(formValues);
+        
     }
     useEffect(() => {
         if (Object.keys(formErrors).length === 0 && isSubmit) {
-            console.log(formValues);
+            auth.logIn(formValues);
             navigate("/home");
         }
     }, [formErrors]);

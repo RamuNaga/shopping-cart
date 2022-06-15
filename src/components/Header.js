@@ -5,11 +5,20 @@ import {
 } from "react-bootstrap";
 import { AiFillDelete } from 'react-icons/ai';
 import { FaShoppingCart } from "react-icons/fa";
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useAuth } from '../context/AuthContext';
 import { CartState } from '../context/Context';
 
 const Header = () => {
     const { state: { cart }, dispatch, productDispatch } = CartState();
+    const auth = useAuth();
+    const navigate = useNavigate();
+    const handleLogout = () =>{
+        console.log("handleLogout")
+        auth.logOut();
+        navigate("/");
+
+    }
     return (
         <Navbar bg='dark' variant='dark' style={{ height: 80 }} >
             <Container>
@@ -58,6 +67,9 @@ const Header = () => {
                         </Dropdown.Menu>
                     </Dropdown>;
                 </Nav>
+                <div>
+                    <span onClick={handleLogout} style={{ fontSize: 15 , color: "white" }}>Log Out</span>
+                </div>
             </Container>
         </Navbar>
     )

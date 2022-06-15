@@ -1,10 +1,11 @@
-import { createContext, useContext, useReducer } from "react";
+import { createContext, useContext, useReducer} from "react";
 // import { faker } from "faker";
 import { cartReducer, productReducer } from "./Reducer";
 import mockProducts from '../mock-json/product';
 
 const Cart = createContext();
-// const auth  = createContext();
+
+
 const Context = ({ children }) => {
     
     const mockData = mockProducts;    
@@ -40,10 +41,13 @@ const Context = ({ children }) => {
     return (<Cart.Provider value = {{state,dispatch,productState,productDispatch}}>{children}</Cart.Provider>)
 }
 
-export default Context;
-
-// export default AuthContext;
 
 export const CartState = () => {
     return useContext(Cart);
 }
+
+
+export default Context;
+
+
+
