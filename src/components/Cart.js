@@ -20,7 +20,7 @@ const Cart = () => {
     dispatch,
   } = CartState();
   const [total, setTotal] = useState();
-  console.log("Adding new console");
+  console.log("Adding new console 2222222222");
   useEffect(() => {
     setTotal(
       cart.reduce((acc, curr) => acc + Number(curr.price) * curr.qty, 0)
